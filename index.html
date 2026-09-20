@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Age calculator - Calculate your exact age online free</title>
+  <meta name="description" content="Free online age calculator.Enter your birth date and get your exact age in years.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  background: #f2f2f2;
+  text-align: center;
+  padding: 20px;
+}
+.box {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 0 10px gray;
+}
+input {
+  padding: 10px;
+  width: 90%;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+button {
+  padding: 12px;
+  width: 95%;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+#result {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Age Calculator</h2>
+  <p>Enter your birth date</p>
+  <input type="number" id="month" placeholder="Month (1-12)">
+  <input type="number" id="day" placeholder="Day (1-31)">
+  <input type="number" id="year" placeholder="Year (e.g. 2000)">
+  <button onclick="calculateAge()">Calculate Age</button>
+  <div id="result"></div> 
+</div>
+
+</body>
+
+<script>
+function calculateAge() {
+  var m = document.getElementById("month").value;
+  var d = document.getElementById("day").value;
+  var y = document.getElementById("year").value;
+
+  if(m == "" || d == "" || y == "") {
+    document.getElementById("result").innerHTML = "Please fill all 3 boxes";
+    return;
+  }
+
+  // Make date from what user typed
+  // Month in JavaScript starts from 0, so we do m-1
+  var dob = new Date(y, m-1, d);
+  var today = new Date();
+
+  var age = today.getFullYear() - dob.getFullYear();
+  var monthDiff = today.getMonth() - dob.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+
+  document.getElementById("result").innerHTML = "You are " + age + " years old";
+}
+</script>
+
+</html>
